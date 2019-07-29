@@ -1,0 +1,425 @@
+https://docs.docker.com/install/linux/docker-ce/centos/
+
+
+[root@localhost ~]# sudo yum remove docker \
+>                   docker-client \
+>                   docker-client-latest \
+>                   docker-common \
+>                   docker-latest \
+>                   docker-latest-logrotate \
+>                   docker-logrotate \
+>                   docker-engine
+Loaded plugins: fastestmirror
+No Match for argument: docker
+No Match for argument: docker-client
+No Match for argument: docker-client-latest
+No Match for argument: docker-common
+No Match for argument: docker-latest
+No Match for argument: docker-latest-logrotate
+No Match for argument: docker-logrotate
+No Match for argument: docker-engine
+No Packages marked for removal
+[root@localhost ~]# sudo yum install -y yum-utils \
+>   device-mapper-persistent-data \
+>   lvm2
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+ * base: mirrors.163.com
+ * extras: mirrors.zju.edu.cn
+ * updates: mirrors.zju.edu.cn
+Package device-mapper-persistent-data-0.7.3-3.el7.x86_64 already installed and latest version
+Package 7:lvm2-2.02.180-10.el7_6.2.x86_64 already installed and latest version
+Resolving Dependencies
+--> Running transaction check
+---> Package yum-utils.noarch 0:1.1.31-50.el7 will be installed
+--> Processing Dependency: python-kitchen for package: yum-utils-1.1.31-50.el7.noarch
+--> Processing Dependency: libxml2-python for package: yum-utils-1.1.31-50.el7.noarch
+--> Running transaction check
+---> Package libxml2-python.x86_64 0:2.9.1-6.el7_2.3 will be installed
+---> Package python-kitchen.noarch 0:1.1.1-5.el7 will be installed
+--> Processing Dependency: python-chardet for package: python-kitchen-1.1.1-5.el7.noarch
+--> Running transaction check
+---> Package python-chardet.noarch 0:2.2.1-1.el7_1 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+===========================================================================================
+ Package                  Arch             Version                    Repository      Size
+===========================================================================================
+Installing:
+ yum-utils                noarch           1.1.31-50.el7              base           121 k
+Installing for dependencies:
+ libxml2-python           x86_64           2.9.1-6.el7_2.3            base           247 k
+ python-chardet           noarch           2.2.1-1.el7_1              base           227 k
+ python-kitchen           noarch           1.1.1-5.el7                base           267 k
+
+Transaction Summary
+===========================================================================================
+Install  1 Package (+3 Dependent packages)
+
+Total download size: 861 k
+Installed size: 4.3 M
+Downloading packages:
+(1/4): libxml2-python-2.9.1-6.el7_2.3.x86_64.rpm                    | 247 kB  00:00:00     
+(2/4): yum-utils-1.1.31-50.el7.noarch.rpm                           | 121 kB  00:00:00     
+(3/4): python-kitchen-1.1.1-5.el7.noarch.rpm                        | 267 kB  00:00:00     
+(4/4): python-chardet-2.2.1-1.el7_1.noarch.rpm                      | 227 kB  00:00:00     
+-------------------------------------------------------------------------------------------
+Total                                                      1.6 MB/s | 861 kB  00:00:00     
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : python-chardet-2.2.1-1.el7_1.noarch                                     1/4 
+  Installing : python-kitchen-1.1.1-5.el7.noarch                                       2/4 
+  Installing : libxml2-python-2.9.1-6.el7_2.3.x86_64                                   3/4 
+  Installing : yum-utils-1.1.31-50.el7.noarch                                          4/4 
+  Verifying  : libxml2-python-2.9.1-6.el7_2.3.x86_64                                   1/4 
+  Verifying  : python-kitchen-1.1.1-5.el7.noarch                                       2/4 
+  Verifying  : yum-utils-1.1.31-50.el7.noarch                                          3/4 
+  Verifying  : python-chardet-2.2.1-1.el7_1.noarch                                     4/4 
+
+Installed:
+  yum-utils.noarch 0:1.1.31-50.el7                                                         
+
+Dependency Installed:
+  libxml2-python.x86_64 0:2.9.1-6.el7_2.3       python-chardet.noarch 0:2.2.1-1.el7_1      
+  python-kitchen.noarch 0:1.1.1-5.el7          
+
+Complete!
+[root@localhost ~]#  sudo yum-config-manager \
+>     --add-repo \
+>     https://download.docker.com/linux/centos/docker-ce.repo
+Loaded plugins: fastestmirror
+adding repo from: https://download.docker.com/linux/centos/docker-ce.repo
+grabbing file https://download.docker.com/linux/centos/docker-ce.repo to /etc/yum.repos.d/docker-ce.repo
+repo saved to /etc/yum.repos.d/docker-ce.repo
+[root@localhost ~]#  sudo yum-config-manager --enable docker-ce-edge
+Loaded plugins: fastestmirror
+================================== repo: docker-ce-edge ===================================
+[docker-ce-edge]
+async = True
+bandwidth = 0
+base_persistdir = /var/lib/yum/repos/x86_64/7
+baseurl = https://download.docker.com/linux/centos/7/x86_64/edge
+cache = 0
+cachedir = /var/cache/yum/x86_64/7/docker-ce-edge
+check_config_file_age = True
+compare_providers_priority = 80
+cost = 1000
+deltarpm_metadata_percentage = 100
+deltarpm_percentage = 
+enabled = 1
+enablegroups = True
+exclude = 
+failovermethod = priority
+ftp_disable_epsv = False
+gpgcadir = /var/lib/yum/repos/x86_64/7/docker-ce-edge/gpgcadir
+gpgcakey = 
+gpgcheck = True
+gpgdir = /var/lib/yum/repos/x86_64/7/docker-ce-edge/gpgdir
+gpgkey = https://download.docker.com/linux/centos/gpg
+hdrdir = /var/cache/yum/x86_64/7/docker-ce-edge/headers
+http_caching = all
+includepkgs = 
+ip_resolve = 
+keepalive = True
+keepcache = False
+mddownloadpolicy = sqlite
+mdpolicy = group:small
+mediaid = 
+metadata_expire = 21600
+metadata_expire_filter = read-only:present
+metalink = 
+minrate = 0
+mirrorlist = 
+mirrorlist_expire = 86400
+name = Docker CE Edge - x86_64
+old_base_cache_dir = 
+password = 
+persistdir = /var/lib/yum/repos/x86_64/7/docker-ce-edge
+pkgdir = /var/cache/yum/x86_64/7/docker-ce-edge/packages
+proxy = False
+proxy_dict = 
+proxy_password = 
+proxy_username = 
+repo_gpgcheck = False
+retries = 10
+skip_if_unavailable = False
+ssl_check_cert_permissions = True
+sslcacert = 
+sslclientcert = 
+sslclientkey = 
+sslverify = True
+throttle = 0
+timeout = 30.0
+ui_id = docker-ce-edge/x86_64
+ui_repoid_vars = releasever,
+   basearch
+username = 
+
+[root@localhost ~]#  sudo yum-config-manager --enable docker-ce-test
+Loaded plugins: fastestmirror
+================================== repo: docker-ce-test ===================================
+[docker-ce-test]
+async = True
+bandwidth = 0
+base_persistdir = /var/lib/yum/repos/x86_64/7
+baseurl = https://download.docker.com/linux/centos/7/x86_64/test
+cache = 0
+cachedir = /var/cache/yum/x86_64/7/docker-ce-test
+check_config_file_age = True
+compare_providers_priority = 80
+cost = 1000
+deltarpm_metadata_percentage = 100
+deltarpm_percentage = 
+enabled = 1
+enablegroups = True
+exclude = 
+failovermethod = priority
+ftp_disable_epsv = False
+gpgcadir = /var/lib/yum/repos/x86_64/7/docker-ce-test/gpgcadir
+gpgcakey = 
+gpgcheck = True
+gpgdir = /var/lib/yum/repos/x86_64/7/docker-ce-test/gpgdir
+gpgkey = https://download.docker.com/linux/centos/gpg
+hdrdir = /var/cache/yum/x86_64/7/docker-ce-test/headers
+http_caching = all
+includepkgs = 
+ip_resolve = 
+keepalive = True
+keepcache = False
+mddownloadpolicy = sqlite
+mdpolicy = group:small
+mediaid = 
+metadata_expire = 21600
+metadata_expire_filter = read-only:present
+metalink = 
+minrate = 0
+mirrorlist = 
+mirrorlist_expire = 86400
+name = Docker CE Test - x86_64
+old_base_cache_dir = 
+password = 
+persistdir = /var/lib/yum/repos/x86_64/7/docker-ce-test
+pkgdir = /var/cache/yum/x86_64/7/docker-ce-test/packages
+proxy = False
+proxy_dict = 
+proxy_password = 
+proxy_username = 
+repo_gpgcheck = False
+retries = 10
+skip_if_unavailable = False
+ssl_check_cert_permissions = True
+sslcacert = 
+sslclientcert = 
+sslclientkey = 
+sslverify = True
+throttle = 0
+timeout = 30.0
+ui_id = docker-ce-test/x86_64
+ui_repoid_vars = releasever,
+   basearch
+username = 
+
+[root@localhost ~]#  sudo yum install docker-ce
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+ * base: mirrors.163.com
+ * extras: mirrors.zju.edu.cn
+ * updates: mirrors.zju.edu.cn
+docker-ce-edge                                                      | 3.5 kB  00:00:00     
+docker-ce-stable                                                    | 3.5 kB  00:00:00     
+docker-ce-test                                                      | 3.5 kB  00:00:00     
+(1/6): docker-ce-edge/x86_64/updateinfo                             |   55 B  00:00:00     
+(2/6): docker-ce-stable/x86_64/primary_db                           |  20 kB  00:00:00     
+(3/6): docker-ce-test/x86_64/updateinfo                             |   55 B  00:00:00     
+(4/6): docker-ce-edge/x86_64/primary_db                             |  24 kB  00:00:00     
+(5/6): docker-ce-stable/x86_64/updateinfo                           |   55 B  00:00:00     
+(6/6): docker-ce-test/x86_64/primary_db                             |  72 kB  00:00:00     
+Resolving Dependencies
+--> Running transaction check
+---> Package docker-ce.x86_64 3:18.09.1-3.el7 will be installed
+--> Processing Dependency: container-selinux >= 2.9 for package: 3:docker-ce-18.09.1-3.el7.x86_64
+--> Processing Dependency: containerd.io for package: 3:docker-ce-18.09.1-3.el7.x86_64
+--> Processing Dependency: docker-ce-cli for package: 3:docker-ce-18.09.1-3.el7.x86_64
+--> Processing Dependency: libcgroup for package: 3:docker-ce-18.09.1-3.el7.x86_64
+--> Running transaction check
+---> Package container-selinux.noarch 2:2.74-1.el7 will be installed
+--> Processing Dependency: policycoreutils-python for package: 2:container-selinux-2.74-1.el7.noarch
+---> Package containerd.io.x86_64 0:1.2.2-3.el7 will be installed
+---> Package docker-ce-cli.x86_64 1:18.09.1-3.el7 will be installed
+--> Processing Dependency: libltdl.so.7()(64bit) for package: 1:docker-ce-cli-18.09.1-3.el7.x86_64
+---> Package libcgroup.x86_64 0:0.41-20.el7 will be installed
+--> Running transaction check
+---> Package libtool-ltdl.x86_64 0:2.4.2-22.el7_3 will be installed
+---> Package policycoreutils-python.x86_64 0:2.5-29.el7 will be installed
+--> Processing Dependency: setools-libs >= 3.3.8-4 for package: policycoreutils-python-2.5-29.el7.x86_64
+--> Processing Dependency: libsemanage-python >= 2.5-14 for package: policycoreutils-python-2.5-29.el7.x86_64
+--> Processing Dependency: audit-libs-python >= 2.1.3-4 for package: policycoreutils-python-2.5-29.el7.x86_64
+--> Processing Dependency: python-IPy for package: policycoreutils-python-2.5-29.el7.x86_64
+--> Processing Dependency: libqpol.so.1(VERS_1.4)(64bit) for package: policycoreutils-python-2.5-29.el7.x86_64
+--> Processing Dependency: libqpol.so.1(VERS_1.2)(64bit) for package: policycoreutils-python-2.5-29.el7.x86_64
+--> Processing Dependency: libapol.so.4(VERS_4.0)(64bit) for package: policycoreutils-python-2.5-29.el7.x86_64
+--> Processing Dependency: checkpolicy for package: policycoreutils-python-2.5-29.el7.x86_64
+--> Processing Dependency: libqpol.so.1()(64bit) for package: policycoreutils-python-2.5-29.el7.x86_64
+--> Processing Dependency: libapol.so.4()(64bit) for package: policycoreutils-python-2.5-29.el7.x86_64
+--> Running transaction check
+---> Package audit-libs-python.x86_64 0:2.8.4-4.el7 will be installed
+---> Package checkpolicy.x86_64 0:2.5-8.el7 will be installed
+---> Package libsemanage-python.x86_64 0:2.5-14.el7 will be installed
+---> Package python-IPy.noarch 0:0.75-6.el7 will be installed
+---> Package setools-libs.x86_64 0:3.3.8-4.el7 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+===========================================================================================
+ Package                     Arch        Version                 Repository           Size
+===========================================================================================
+Installing:
+ docker-ce                   x86_64      3:18.09.1-3.el7         docker-ce-edge       19 M
+Installing for dependencies:
+ audit-libs-python           x86_64      2.8.4-4.el7             base                 76 k
+ checkpolicy                 x86_64      2.5-8.el7               base                295 k
+ container-selinux           noarch      2:2.74-1.el7            extras               38 k
+ containerd.io               x86_64      1.2.2-3.el7             docker-ce-edge       22 M
+ docker-ce-cli               x86_64      1:18.09.1-3.el7         docker-ce-edge       14 M
+ libcgroup                   x86_64      0.41-20.el7             base                 66 k
+ libsemanage-python          x86_64      2.5-14.el7              base                113 k
+ libtool-ltdl                x86_64      2.4.2-22.el7_3          base                 49 k
+ policycoreutils-python      x86_64      2.5-29.el7              base                456 k
+ python-IPy                  noarch      0.75-6.el7              base                 32 k
+ setools-libs                x86_64      3.3.8-4.el7             base                620 k
+
+Transaction Summary
+===========================================================================================
+Install  1 Package (+11 Dependent packages)
+
+Total download size: 56 M
+Installed size: 241 M
+Is this ok [y/d/N]: y
+Downloading packages:
+(1/12): audit-libs-python-2.8.4-4.el7.x86_64.rpm                    |  76 kB  00:00:00     
+(2/12): checkpolicy-2.5-8.el7.x86_64.rpm                            | 295 kB  00:00:00     
+warning: /var/cache/yum/x86_64/7/docker-ce-edge/packages/containerd.io-1.2.2-3.el7.x86_64.rpm: Header V4 RSA/SHA512 Signature, key ID 621e9f35: NOKEY
+Public key for containerd.io-1.2.2-3.el7.x86_64.rpm is not installed
+(3/12): containerd.io-1.2.2-3.el7.x86_64.rpm                        |  22 MB  00:00:18     
+(4/12): libcgroup-0.41-20.el7.x86_64.rpm                            |  66 kB  00:00:00     
+(5/12): libsemanage-python-2.5-14.el7.x86_64.rpm                    | 113 kB  00:00:00     
+(6/12): libtool-ltdl-2.4.2-22.el7_3.x86_64.rpm                      |  49 kB  00:00:00     
+(7/12): python-IPy-0.75-6.el7.noarch.rpm                            |  32 kB  00:00:00     
+(8/12): policycoreutils-python-2.5-29.el7.x86_64.rpm                | 456 kB  00:00:00     
+(9/12): setools-libs-3.3.8-4.el7.x86_64.rpm                         | 620 kB  00:00:00     
+container-selinux-2.74-1.el7.n FAILED                                          0:00:03 ETA 
+http://mirrors.zju.edu.cn/centos/7.6.1810/extras/x86_64/Packages/container-selinux-2.74-1.el7.noarch.rpm: [Errno 12] Timeout on http://mirrors.zju.edu.cn/centos/7.6.1810/extras/x86_64/Packages/container-selinux-2.74-1.el7.noarch.rpm: (28, 'Operation too slow. Less than 1000 bytes/sec transferred the last 30 seconds')
+Trying other mirror.
+(10/12): docker-ce-cli-18.09.1-3.el7.x86_64.rpm                     |  14 MB  00:00:12     
+(11/12): container-selinux-2.74-1.el7.noarch.rpm                    |  38 kB  00:00:03     
+(12/12): docker-ce-18.09.1-3.el7.x86_64.rpm                         |  19 MB  00:00:37     
+-------------------------------------------------------------------------------------------
+Total                                                      1.5 MB/s |  56 MB  00:00:37     
+Retrieving key from https://download.docker.com/linux/centos/gpg
+Importing GPG key 0x621E9F35:
+ Userid     : "Docker Release (CE rpm) <docker@docker.com>"
+ Fingerprint: 060a 61c5 1b55 8a7f 742b 77aa c52f eb6b 621e 9f35
+ From       : https://download.docker.com/linux/centos/gpg
+Is this ok [y/N]: y
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : libcgroup-0.41-20.el7.x86_64                                           1/12 
+  Installing : setools-libs-3.3.8-4.el7.x86_64                                        2/12 
+  Installing : audit-libs-python-2.8.4-4.el7.x86_64                                   3/12 
+  Installing : libtool-ltdl-2.4.2-22.el7_3.x86_64                                     4/12 
+  Installing : 1:docker-ce-cli-18.09.1-3.el7.x86_64                                   5/12 
+  Installing : python-IPy-0.75-6.el7.noarch                                           6/12 
+  Installing : libsemanage-python-2.5-14.el7.x86_64                                   7/12 
+  Installing : containerd.io-1.2.2-3.el7.x86_64                                       8/12 
+  Installing : checkpolicy-2.5-8.el7.x86_64                                           9/12 
+  Installing : policycoreutils-python-2.5-29.el7.x86_64                              10/12 
+  Installing : 2:container-selinux-2.74-1.el7.noarch                                 11/12 
+  Installing : 3:docker-ce-18.09.1-3.el7.x86_64                                      12/12 
+  Verifying  : libcgroup-0.41-20.el7.x86_64                                           1/12 
+  Verifying  : checkpolicy-2.5-8.el7.x86_64                                           2/12 
+  Verifying  : containerd.io-1.2.2-3.el7.x86_64                                       3/12 
+  Verifying  : libsemanage-python-2.5-14.el7.x86_64                                   4/12 
+  Verifying  : policycoreutils-python-2.5-29.el7.x86_64                               5/12 
+  Verifying  : 1:docker-ce-cli-18.09.1-3.el7.x86_64                                   6/12 
+  Verifying  : python-IPy-0.75-6.el7.noarch                                           7/12 
+  Verifying  : libtool-ltdl-2.4.2-22.el7_3.x86_64                                     8/12 
+  Verifying  : 3:docker-ce-18.09.1-3.el7.x86_64                                       9/12 
+  Verifying  : 2:container-selinux-2.74-1.el7.noarch                                 10/12 
+  Verifying  : audit-libs-python-2.8.4-4.el7.x86_64                                  11/12 
+  Verifying  : setools-libs-3.3.8-4.el7.x86_64                                       12/12 
+
+Installed:
+  docker-ce.x86_64 3:18.09.1-3.el7                                                         
+
+Dependency Installed:
+  audit-libs-python.x86_64 0:2.8.4-4.el7          checkpolicy.x86_64 0:2.5-8.el7           
+  container-selinux.noarch 2:2.74-1.el7           containerd.io.x86_64 0:1.2.2-3.el7       
+  docker-ce-cli.x86_64 1:18.09.1-3.el7            libcgroup.x86_64 0:0.41-20.el7           
+  libsemanage-python.x86_64 0:2.5-14.el7          libtool-ltdl.x86_64 0:2.4.2-22.el7_3     
+  policycoreutils-python.x86_64 0:2.5-29.el7      python-IPy.noarch 0:0.75-6.el7           
+  setools-libs.x86_64 0:3.3.8-4.el7              
+
+Complete!
+[root@localhost ~]# sudo systemctl start docker
+[root@localhost ~]# docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+[root@localhost ~]# docker version
+Client:
+ Version:           18.09.1
+ API version:       1.39
+ Go version:        go1.10.6
+ Git commit:        4c52b90
+ Built:             Wed Jan  9 19:35:01 2019
+ OS/Arch:           linux/amd64
+ Experimental:      false
+
+Server: Docker Engine - Community
+ Engine:
+  Version:          18.09.1
+  API version:      1.39 (minimum version 1.12)
+  Go version:       go1.10.6
+  Git commit:       4c52b90
+  Built:            Wed Jan  9 19:06:30 2019
+  OS/Arch:          linux/amd64
+  Experimental:     false
+[root@localhost ~]# docker ps -a
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+[root@localhost ~]# sudo docker run hello-world
+Unable to find image 'hello-world:latest' locally
+latest: Pulling from library/hello-world
+1b930d010525: Pull complete 
+Digest: sha256:2557e3c07ed1e38f26e389462d03ed943586f744621577a99efb77324b0fe535
+Status: Downloaded newer image for hello-world:latest
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+    (amd64)
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+Share images, automate workflows, and more with a free Docker ID:
+ https://hub.docker.com/
+
+For more examples and ideas, visit:
+ https://docs.docker.com/get-started/
+
+[root@localhost ~]# docker ps -a
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                     PORTS               NAMES
+ba40ae1b4f00        hello-world         "/hello"            10 seconds ago      Exited (0) 9 seconds ago                       flamboyant_mclaren
+[root@localhost ~]# 
